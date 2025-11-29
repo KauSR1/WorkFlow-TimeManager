@@ -1,0 +1,53 @@
+# ----------------------------------------------------
+# 1. SECRETS E VARIÁVEIS DE AMBIENTE (CRÍTICO)
+# Não devem ser rastreados para repositórios públicos
+# ----------------------------------------------------
+.env
+.env.testing
+
+# ----------------------------------------------------
+# 2. DEPENDÊNCIAS DE PROJETO (Geradas Automaticamente)
+# ----------------------------------------------------
+/vendor
+/node_modules
+
+# ----------------------------------------------------
+# 3. CACHE, LOGS E SESSÕES (Laravel)
+# ----------------------------------------------------
+# Logs da aplicação
+/storage/logs/*.log
+
+# Cache do Framework
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/*.key
+
+# Cache de configuração
+/bootstrap/cache/*.php
+
+# ----------------------------------------------------
+# 4. BUILDS, VOLUMES DOCKER E UPLOADS
+# ----------------------------------------------------
+/public/hot
+/public/storage
+/public/build
+
+# Volumes locais de dados Docker (se você os mapeou)
+dbdata/
+redis_data/
+
+# ----------------------------------------------------
+# 5. ARQUIVOS DE SISTEMA OPERACIONAL E IDEs
+# ----------------------------------------------------
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# IDEs (PhpStorm, VS Code, etc.)
+/.idea
+*.sublime-workspace
+*.orig
+*~

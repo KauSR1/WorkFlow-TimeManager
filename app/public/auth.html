@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Ponto - Login</title>
+    <link rel="icon" href="./assets/favicons/favicon-16x16.png" type="image/x-icon">
+     <link rel="stylesheet" href="../src/styles/auth/auth.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Logo e Header -->
+        <div class="logo-container">
+            <div class="logo">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+            </div>
+            <h1>Controle de Ponto</h1>
+            <p class="subtitle">Gerencie seus horários e registros de trabalho</p>
+        </div>
+
+        <!-- Card de Login -->
+        <div class="card">
+            <!-- Mensagem de erro -->
+            <div class="error-message" id="errorMessage"></div>
+
+            <!-- Formulário -->
+            <form id="loginForm">
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </span>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            placeholder="seu@email.com" 
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                </div>
+
+                <!-- Senha -->
+                <div class="form-group">
+                    <label for="password" class="form-label">Senha</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </span>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            placeholder="••••••••" 
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button type="button" class="toggle-password" id="togglePassword" title="Mostrar/Ocultar senha">
+                            <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lembrar-me e Esqueci senha -->
+                <div class="form-row">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <span class="checkbox-label">Lembrar-me</span>
+                    </label>
+                    <a href="forgot-password.html" class="forgot-link">Esqueci a senha</a>
+                </div>
+
+                <!-- Botão de login -->
+                <button type="submit" class="btn-login" id="btnLogin">
+                    <span id="btnText">Entrar</span>
+                </button>
+            </form>
+
+            <!-- Divisor -->
+            <div class="divider">
+                <span>Ou</span>
+            </div>
+
+            <!-- Cadastro -->
+            <div class="signup-text">
+                Não tem uma conta? 
+                <a href="register.html" class="signup-link">Cadastre-se aqui</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            © 2025 Controle de Ponto. Todos os direitos reservados.
+        </div>
+    </div>
+    <script src="../src/features/auth/auth.js"></script>
+</body>
+</html>

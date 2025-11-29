@@ -1,0 +1,1 @@
+//✨ (✨ ✨ (A criar): Variáveis de ambiente, URL base da API.

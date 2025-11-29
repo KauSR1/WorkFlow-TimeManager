@@ -1,0 +1,1 @@
+//✨ (A criar): Funções registerPoint(), getRegisters(), etc.

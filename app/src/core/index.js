@@ -1,0 +1,1 @@
+//✨ (A criar): Ponto de inicialização do JS (Importa o tracker.js ou rotas).
