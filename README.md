@@ -67,4 +67,5 @@ A seguir está o texto completo do arquivo LICENSE para o seu projeto, formatado
 Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 📷 Capturas de Tela
+
 <img width="1906" height="901" alt="image" src="https://github.com/user-attachments/assets/0451d749-9ee4-4eea-bf2e-b4c41eb94c06" />
