@@ -1,62 +1,72 @@
-version: '3.8'
+
 
 services:
-  workflow-timemanager: 
-    # Usamos volumes para que o NGINX veja as mudanças em tempo real
-    # O contexto (..) aponta para a raiz do projeto.
-    volumes:
-      # 1. Mapeia a pasta 'public' (HTML) para a raiz do NGINX
-      - ../app/public:/usr/share/nginx/html 
-      # 2. Mapeia a pasta 'src' (CSS/JS) para o alias configurado no NGINX
-      - ../app/src:/usr/share/nginx/src 
-    
+
+  # =============================
+  # FRONTEND (NGINX)
+  # =============================
+  workflow-timemanager:
     build:
       context: ..
       dockerfile: ./docker/Dockerfile
-      
     container_name: WorkFlow-TimeManager-frontend
-    
+    volumes:
+      - ../app/public:/usr/share/nginx/html
+      - ../app/src:/usr/share/nginx/src
     ports:
-      - "3000:80" 
-      
+      - "3000:80"
     restart: unless-stopped
 
-  # ===============================================
-  # NOVO SERVIÇO: BANCO DE DADOS (POSTGRESQL)
-  # ===============================================
-  timetracker-db:
-    image: postgres:latest
-    container_name: timetracker-db
-    restart: always
-    environment:
-      # Variáveis de ambiente - Correspondem aos argumentos '-e'
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
-    ports:
-      # Mapeamento de portas - Corresponde ao argumento
-      - "5432:5432"
-    volumes:
-      # Volume nomeado para persistir os dados do banco, altamente recomendado!
-      - timetracker_data:/var/lib/postgresql
-    
+  # =============================
+  # LARAVEL API (PHP-FPM)
+  # =============================
   api:
     build:
-      context: ..
-      dockerfile: ./docker/Dockerfile-api
+      context: ../api
+      dockerfile: ../docker/Dockerfile-api
     container_name: timetracker-api
     restart: unless-stopped
     volumes:
       - ../api:/var/www/html
+    env_file:
+      - ../api/.env
     depends_on:
       - timetracker-db
       - redis
-    working_dir: /var/www/html
-      
-  # ===============================================
-  # SERVIÇO DE CACHE E FILA (REDIS)
-  # Usado pelo Laravel para gerenciar sessões, cache e tarefas assíncronas.
-  # ===============================================
+
+  # =============================
+  # NGINX DA API
+  # =============================
+  api-nginx:
+    image: nginx:latest
+    container_name: timetracker-api-nginx
+    ports:
+      - "9000:80"
+    volumes:
+      - ../api:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - api
+
+  # =============================
+  # POSTGRES
+  # =============================
+  timetracker-db:
+    image: postgres:16
+    container_name: timetracker-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - timetracker_data:/var/lib/postgresql/data
+
+  # =============================
+  # REDIS
+  # =============================
   redis:
     image: redis:alpine
     container_name: timetracker-redis
@@ -64,7 +74,6 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      # Volume nomeado para persistir o cache e os dados das filas
       - redis_data:/data
 
 volumes:
